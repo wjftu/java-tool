@@ -30,4 +30,4 @@ jobs:
 
       # 4. Scp to VM
       - name: Copy JAR to VM using SCP
-        run: sshpass -p "${{ secrets.VM_PASSWORD }}" scp  ./build/libs/java-tool-0.0.1-SNAPSHOT.jar ${{ secrets.VM_USERNAME }}@${{ secrets.VM_HOST }}:/home/${{ secrets.VM_USERNAME }}/tool.jar
+        run: sshpass -p ${{ secrets.VM_PASSWORD }} scp  ./build/libs/java-tool-0.0.1-SNAPSHOT.jar ${{ secrets.VM_USERNAME }}@${{ secrets.VM_HOST }}:/home/${{ secrets.VM_USERNAME }}/tool.jar
