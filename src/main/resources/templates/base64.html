@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Base64</title>
+</head>
+<body>
+<h1>Base64 Encoder</h1>
+
+
+    <form id="myForm" th:action="@{/base64encode}" method="post">
+        <!-- Form data -->
+        <label for="plain">Plain Text:</label>
+
+        <p><textarea type="text" id="plain" name="plain" th:text="${plain}"></textarea></p>
+
+        <br/>
+
+        <label for="base64">Base64:</label>
+        <p><textarea type="text" id="base64" name="base64" th:text="${base64}"></textarea></p>
+
+        <br/>
+
+        <button type="button" onclick="submitForm('/base64encode')">Encode to Base64</button>
+
+        <br/>
+
+        <button type="button" onclick="submitForm('/base64decode')">Decode from Base64</button>
+    </form>
+
+    <script>
+        // JavaScript function to change the form's action and submit
+        function submitForm(action) {
+            const form = document.getElementById("myForm");
+            form.action = action;  // Update form action to target the specified path
+            form.submit();         // Submit the form
+        }
+    </script>
+
+</body>
+</html>
