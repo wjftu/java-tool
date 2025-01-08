@@ -50,6 +50,5 @@ jobs:
           script: |
 #            echo "Stopping existing Spring Boot application (if running)..."
 #            pkill -f 'java -jar'
-
             echo "Starting the new Spring Boot application..."
             nohup java -jar /home/${{ secrets.VM_USERNAME }}/java-tool-0.0.1-SNAPSHOT.jar > /dev/null 2>&1 &
