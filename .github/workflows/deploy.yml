@@ -1,0 +1,39 @@
+name: Deploy Spring Boot Application
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Checkout the code from the repository
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # 2. Set up JDK
+      - name: Set up JDK 17
+        uses: actions/setup-java@v2
+        with:
+          java-version: '17'
+
+      # 3. Run Gradle build
+      - name: Build and test
+        run: ./gradlew build --no-daemon
+
+      # 4. Scp to VM
+      - name: Copy JAR to VM using SCP
+        uses: appleboy/ssh-action@v0.1.7
+        with:
+          host: ${{ secrets.VM_HOST }}
+          username: ${{ secrets.VM_USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          script: |
+            echo "Copying JAR file to VM..."
+            scp  ./build/libs/java-tool-0.0.1-SNAPSHOT.jar ${{ secrets.VM_USERNAME }}@${{ secrets.VM_PASSWORD }}:/home/${{ secrets.VM_USERNAME }}/tool.jar
