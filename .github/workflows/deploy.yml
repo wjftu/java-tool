@@ -36,8 +36,8 @@ jobs:
           username: ${{ secrets.VM_USERNAME }}
           password: ${{ secrets.VM_PASSWORD }}
           port: 22
-          source: "./build/libs/java-tool-0.0.1-SNAPSHOT.jar"
-          target: /home/${{ secrets.VM_USERNAME }}/tool.jar
+          source: "build/libs/java-tool-0.0.1-SNAPSHOT.jar"
+          target: /home/${{ secrets.VM_USERNAME }}/
 
       # Step 6: SSH into the VM and run the JAR file
       - name: Start Spring Boot app on VM
@@ -52,4 +52,4 @@ jobs:
             pkill -f 'java -jar'
 
             echo "Starting the new Spring Boot application..."
-            nohup java -jar /home/${{ secrets.VM_USERNAME }}/tool.jar > /dev/null 2>&1 &
+            nohup java -jar /home/${{ secrets.VM_USERNAME }}/java-tool-0.0.1-SNAPSHOT.jar > /dev/null 2>&1 &
