@@ -38,3 +38,18 @@ jobs:
           port: 22
           source: "./build/libs/java-tool-0.0.1-SNAPSHOT.jar"
           target: /home/${{ secrets.VM_USERNAME }}/tool.jar
+
+      # Step 6: SSH into the VM and run the JAR file
+      - name: Start Spring Boot app on VM
+        uses: appleboy/ssh-action@v0.1.7
+        with:
+          host: ${{ secrets.VM_HOST }}
+          username: ${{ secrets.VM_USERNAME }}
+          password: ${{ secrets.VM_PASSWORD }}
+          port: 22
+          script: |
+            echo "Stopping existing Spring Boot application (if running)..."
+            pkill -f 'java -jar'
+
+            echo "Starting the new Spring Boot application..."
+            nohup java -jar /home/${{ secrets.VM_USERNAME }}/tool.jar > /dev/null 2>&1 &
