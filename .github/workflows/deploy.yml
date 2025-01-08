@@ -22,6 +22,7 @@ jobs:
         uses: actions/setup-java@v2
         with:
           java-version: '17'
+          distribution: zulu
 
       # 3. Run Gradle build
       - name: Build and test
