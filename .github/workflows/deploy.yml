@@ -30,11 +30,4 @@ jobs:
 
       # 4. Scp to VM
       - name: Copy JAR to VM using SCP
-        uses: appleboy/ssh-action@v0.1.7
-        with:
-          host: ${{ secrets.VM_HOST }}
-          username: ${{ secrets.VM_USERNAME }}
-          password: ${{ secrets.PASSWORD }}
-          script: |
-            echo "Copying JAR file to VM..."
-            sshpass -p "${{ secrets.VM_PASSWORD }}" scp  ./build/libs/java-tool-0.0.1-SNAPSHOT.jar ${{ secrets.VM_USERNAME }}@${{ secrets.VM_HOST }}:/home/${{ secrets.VM_USERNAME }}/tool.jar
+        run: sshpass -p "${{ secrets.VM_PASSWORD }}" scp  ./build/libs/java-tool-0.0.1-SNAPSHOT.jar ${{ secrets.VM_USERNAME }}@${{ secrets.VM_HOST }}:/home/${{ secrets.VM_USERNAME }}/tool.jar
