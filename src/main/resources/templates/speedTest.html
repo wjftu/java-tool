@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Speed Test</title>
+    <style>
+        body {
+            align-items: center;
+            height: 100vh;
+        }
+        h1 {
+            text-align: center;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0 auto;
+            max-width: 500px;
+            padding: 20px;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Speed Test</h1>
+
+
+    <form id="myForm" th:action="@{/speedTest}" method="post">
+        <!-- Form data -->
+        <div>
+            <label for="url">URL:</label>
+            <input type="text" id="url" name="url" th:value="${url}"></input>
+        </div>
+
+        <br/>
+
+        <div>
+            <label for="threadCnt">Thread Count:</label>
+            <input type="text" id="threadCnt" name="threadCnt" th:value="${threadCnt}"></input>
+        </div>
+
+        <br/>
+
+        <div>
+            <label for="total">Total:</label>
+            <input type="text" id="total" name="total" th:value="${total}"></input>
+        </div>
+
+        <br/>
+
+        <button type="submit">Submit</button>
+
+    </form>
+
+    <div th:if="${result != null}">
+        <div>Last Test：</div>
+        <div th:text="${result}"></div>
+    </div>
+
+</body>
+</html>
