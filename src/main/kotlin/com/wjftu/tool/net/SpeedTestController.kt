@@ -14,7 +14,7 @@ class SpeedTestController(
 
     @GetMapping("/speedTest")
     fun speedTest() : ModelAndView {
-        val mav = ModelAndView("speedtest")
+        val mav = ModelAndView("speedTest")
         mav.addObject("result", speedTestService.testResult)
         return mav
     }
