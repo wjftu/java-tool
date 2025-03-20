@@ -86,14 +86,14 @@ class SpeedTestService {
         try {
             // 创建 GET 请求
             val httpGet = HttpGet(uri)
-            httpGet.addHeader("", "")
+            httpGet.addHeader("user-agent", "Mozilla/5.0 (Linux; Android 8.0.0; SM-G955U Build/R16NW) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Mobile Safari/537.36")
 
             httpClient.executeOpen(null, httpGet, null).use { response ->
                 val entity = response.entity
                 entity?.let {
                     val contentLength = entity.contentLength
                     if (contentLength >= 0) {
-                        println("${Thread.currentThread().name} - Content Length: $contentLength bytes")
+                        traffic = contentLength
                     } else {
                         // If content length is unknown, calculate the actual size by reading the body
                         val byteArrayOutputStream = ByteArrayOutputStream()
